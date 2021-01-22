@@ -1,0 +1,20 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: spark-pi
+  labels:
+    job: spark-test
+spec:
+  sparkVersion: 2.4.5
+  type: Scala
+  mode: cluster
+  image: psschwei/build-spark-with-tekton:latest
+  imagePullPolicy: Always
+  mainClass: SparkPi
+  mainApplicationFile: local:///opt/spark/target/scala-2.11/kubernetes-assembly-1.0.0.jar
+  driver:
+    memory: 1g
+  executor:
+    instances: 2
+    memory: 2g
+
